@@ -11,7 +11,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app)
 
-
 # 会员
 class User(db.Model):
     __tablename__ = 'user'
@@ -31,7 +30,6 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.name
 
-
 # 会员登录日志
 class Userlog(db.Model):
     __tablename__ = 'userlog'
@@ -43,7 +41,6 @@ class Userlog(db.Model):
     def __repr__(self):
         return '<Userlog %r>' % self.id
 
-
 # 标签
 class Tag(db.Model):
     __tablename__ = 'tag'
@@ -54,7 +51,6 @@ class Tag(db.Model):
 
     def __repr__(self):
         return '<Tag %r>' % self.name
-
 
 # 电影
 class Movie(db.Model):
@@ -77,7 +73,6 @@ class Movie(db.Model):
     def __repr__(self):
         return '<Movie %r>' % self.title
 
-
 # 预告
 class Preview(db.Model):
     __tablename__ = 'preview'
@@ -88,7 +83,6 @@ class Preview(db.Model):
 
     def __repr__(self):
         return '<Preview %r>' % self.title
-
 
 # 评论
 class Comment(db.Model):
@@ -102,7 +96,6 @@ class Comment(db.Model):
     def __repr__(self):
         return '<Comment %r>' % self.id
 
-
 # 电影收藏
 class Moviecol(db.Model):
     __tablename__ = 'moviecol'
@@ -113,7 +106,6 @@ class Moviecol(db.Model):
 
     def __repr__(self):
         return '<Moviecol %r>' % self.id
-
 
 # 权限
 class Auth(db.Model):
@@ -126,7 +118,6 @@ class Auth(db.Model):
     def __repr__(self):
         return '<Auth %r>' % self.name
 
-
 # 角色
 class Role(db.Model):
     __tablename__ = 'role'
@@ -137,7 +128,6 @@ class Role(db.Model):
 
     def __repr__(self):
         return '<Role %r>' % self.name
-
 
 # 管理员
 class Admin(db.Model):
@@ -154,7 +144,6 @@ class Admin(db.Model):
     def __repr__(self):
         return '<Admin %r>' % self.name
 
-
 # 管理员登录
 class Adminlog(db.Model):
     __tablename__ = 'adminlog'
@@ -165,7 +154,6 @@ class Adminlog(db.Model):
 
     def __repr__(self):
         return '<Adminlog %r>' % self.id
-
 
 # 操作日志
 class Oplog(db.Model):
@@ -178,7 +166,6 @@ class Oplog(db.Model):
 
     def __repr__(self):
         return '<Adminlog %r>' % self.id
-
 
 if __name__ == '__main__':
     # db.create_all()
