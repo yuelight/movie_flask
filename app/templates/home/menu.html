@@ -18,17 +18,18 @@
     </div>
 </div>
 
-{% block js %}
-    <script>
+<script>
+    window.onload = function () {
+        var reg;
         var url = location.pathname;
         var lists = document.querySelectorAll('.list-group-item');
 
         lists.forEach(function (item) {
-            item.classList.remove('active');
+            reg = new RegExp('^' + item.getAttribute('href'));
 
-            if (item.getAttribute('href') == url) {
+            if (reg.test(url)) {
                 item.classList.add('active');
             }
-        })
-    </script>
-{% endblock%}
+        });
+    }
+</script>
