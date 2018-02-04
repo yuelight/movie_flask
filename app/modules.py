@@ -1,15 +1,6 @@
 # coding:utf8
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from _datetime import datetime
-import pymysql
-from werkzeug.security import generate_password_hash
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:12345678@127.0.0.1:3306/movie'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-
-db = SQLAlchemy(app)
+from app import db
 
 # 会员
 class User(db.Model):
@@ -62,9 +53,10 @@ class Movie(db.Model):
     logo = db.Column(db.String(255), unique=True)
     star = db.Column(db.SmallInteger)
     playnum = db.Column(db.BigInteger)
+    commentnum = db.Column(db.BigInteger)
     tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'))
     area = db.Column(db.String(255))
-    release = db.Column(db.Date)
+    release_time = db.Column(db.Date)
     length = db.Column(db.String(100))
     addtime = db.Column(db.DateTime, index=True, default=datetime.now())
     comments = db.relationship('Comment', backref='movie')  # 评论外键关联
@@ -144,6 +136,10 @@ class Admin(db.Model):
     def __repr__(self):
         return '<Admin %r>' % self.name
 
+    def check_pwd(self, pwd):
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.pwd, pwd)
+
 # 管理员登录
 class Adminlog(db.Model):
     __tablename__ = 'adminlog'
@@ -161,7 +157,7 @@ class Oplog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'))
     ip = db.Column(db.String(100))
-    reson = db.Column(db.String(600))
+    reason = db.Column(db.String(600))
     addtime = db.Column(db.DateTime, index=True, default=datetime.now())
 
     def __repr__(self):
